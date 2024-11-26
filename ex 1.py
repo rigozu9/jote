@@ -61,30 +61,75 @@ def generate_tuples(n):
         v.append([b, r, i, g, s, m])
     return v
 
-def calculate_propability(tuples):
-    n = len(tuples)
-    correct_tuples = []
-    for i in tuples:
-        # if i[0] == 1:
-        #     if i[1] == 1:
-        #         if i[3] == 1:
-        #             if i[4] == 0:
-        #                 correct_tuples.append("P(B|R,G,-S)")
-        # if i[4] == 1:
-        #     if i[1] == 1:
-        #         if i[2] == 1:
-        #             if i[3] == 1:
-        #                 correct_tuples.append("P(S|R,I,G)")
-        if i[0] == 1:
-            if i[1] == 0:
-                if i[2] == 1:
-                    if i[3] == 1:
-                        correct_tuples.append("P(B|-R,I,G)")
+# def calculate_propability(tuples):
+#     n = len(tuples)
+#     correct_tuples = []
+#     for i in tuples:
+#         # if i[0] == 1:
+#         #     if i[1] == 1:
+#         #         if i[3] == 1:
+#         #             if i[4] == 0:
+#         #                 correct_tuples.append("P(B|R,G,-S)")
+#         # if i[4] == 1:
+#         #     if i[1] == 1:
+#         #         if i[2] == 1:
+#         #             if i[3] == 1:
+#         #                 correct_tuples.append("P(S|R,I,G)")
+#         if i[0] == 1:
+#             if i[1] == 0:
+#                 if i[2] == 1:
+#                     if i[3] == 1:
+#                         correct_tuples.append("P(B|-R,I,G)")
     
 
-    return f"{correct_tuples[0]}:", len(correct_tuples)/n
+#     return f"{correct_tuples[0]}:", len(correct_tuples)/n
 
+# n=100000
+# tuples = generate_tuples(n)
+# print(calculate_propability(tuples))
+# "P(B|-R,I,G)" oli samaa, muut eri
+
+#[b, r, i, g, s, m]
 n=100000
 tuples = generate_tuples(n)
-print(calculate_propability(tuples))
-# "P(B|-R,I,G)" oli samaa, muut eri
+print("P(B|R,G,-S)")
+count1 = 0
+for i in tuples:
+    if i[0] == 1 and i[1] == 1 and i[3] == 1 and i[4] == 0:
+        count1 += 1
+count2 = 0
+for i in tuples:
+    if i[1] == 1 and i[3] == 1 and i[4] == 0:
+        count2 += 1
+
+count1 /= n
+count2 /= n
+print(count1/count2)
+
+print("P(S|R,I,G)")
+count1 = 0
+for i in tuples:
+    if i[4] == 1 and i[1] == 1 and i[2] == 1 and i[3] == 1:
+        count1 += 1
+count2 = 0
+for i in tuples:
+    if i[1] == 1 and i[2] == 1 and i[3] == 1:
+        count2 += 1
+
+count1 /= n
+count2 /= n
+print(count1/count2)
+
+print("P(S|-R,I,G)")
+count1 = 0
+for i in tuples:
+    if i[4] == 1 and i[1] == 0 and i[2] == 1 and i[3] == 1:
+        count1 += 1
+count2 = 0
+for i in tuples:
+    if i[1] == 0 and i[2] == 1 and i[3] == 1:
+        count2 += 1
+
+count1 /= n
+count2 /= n
+print(count1/count2)
