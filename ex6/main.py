@@ -31,12 +31,15 @@ def main():
     # Initialize Nearest Neighbor classifier
     nn = NearestNeighbor(IMGS_FILE, CHARS_FILE)
 
-    print("3 vs 5")
-    test_data = [e for e in nn.training_data[5000:] if e['char'] in ('3', '5')]
+    # print("3 vs 5")
+    # test_data = [e for e in nn.training_data[5000:] if e['char'] in ('3', '5')]
     # print("1 vs 0")
     # test_data = [e for e in nn.training_data[5000:] if e['char'] in ('1', '0')]
-    # print("1 vs 0")
-    # test_data = [e for e in nn.training_data[5000:] if e['char'] in ('1', '0')]
+    # print("5 vs 6")
+    # test_data = [e for e in nn.training_data[5000:] if e['char'] in ('5', '6')]
+
+    print("All the classes")
+    test_data = nn.training_data[5000:]
 
     test_vectors = [e['vector'] for e in test_data]
     test_labels = [e['char'] for e in test_data]
